@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Поиск по коллекции статей</title>
+</head>
+<body>
+<h1>Поиск</h1>
+<form method="get">
+    <label>Ваш запрос <input type="text" name="query"> </label><br>
+    <input type="submit" value="Искать">
+</form>
+{% if result %}
+        <h2>Отсортированные результаты поиска:</h2>
+        <ul>
+    {% for elem in result %}
+    <li><b>Оценка:</b> {{elem[1]}} <b>Ссылка:</b> {{elem[0]}}</li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
