@@ -3,20 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Поиск по коллекции статей</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style> body { overflow: hidden; margin-left: auto}
+    #cat { position: absolute; left: -1000px }
+    .search-form {text-align: center}
+    </style>
+<script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+    <script type=text/javascript>
+        $(function() {
+    var img = $("#cat"),
+        width = img.get(0).width,
+        screenWidth = $(window).width(),
+        duration = 5000;
+
+    function animateCat() {
+        img.css("left", -width).animate({
+            "left": screenWidth
+        }, duration, animateCat);
+    }
+
+    animateCat();
+});
+    </script>
 </head>
 <body>
+<div class="container theme-showcase" role="main">
+<div class="search-form">
 <h1>Поиск</h1>
 <form method="get">
-    <label>Ваш запрос <input type="text" name="query"> </label><br>
-    <input type="submit" value="Искать">
+    <input type="text" name="query" placeholder="Введите ваш запрос">
+    <input class="btn btn-default" type="submit" value="Искать">
 </form>
+</div>
 {% if result %}
         <h2>Отсортированные результаты поиска:</h2>
         <ul>
     {% for elem in result %}
-    <li><b>Оценка:</b> {{elem[1]}} <b>Ссылка:</b> {{elem[0]}}</li>
+    <li><b>Название и ссылка:</b> <a href={{elem[0]}}>{{elem[1]}}</a>  <b>Оценка:</b> {{elem[2]}} </li>
     {% endfor %}
     </ul>
     {% endif %}
+<div>
+        <img id = "cat" src =
+     "https://78.media.tumblr.com/tumblr_m2qg6hCFmg1qz9vd8o1_1280.gif" height="65%">
+    </div>
+</div>
 </body>
 </html>

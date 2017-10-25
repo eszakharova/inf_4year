@@ -99,7 +99,7 @@ class SearchRank:
         self.N = len(self.documents)
         self.avdl = sum_dl/self.N
         
-    def query(self, query, num_links = 10, another_dir_path=None):
+    def query(self, query, num_links=10, another_dir_path=None):
         query_tokens = self.maker.tokenize(query)
         ranking = defaultdict(int)
         if another_dir_path:
@@ -126,5 +126,5 @@ class SearchRank:
             if len(ranking) < num_links:
                 num_links = len(ranking)
         for doc in sorted(ranking, key=lambda x: ranking[x], reverse=True)[:num_links]:
-            res.append((doc.url, ranking[doc]))
+            res.append((doc.url, doc.title,  ranking[doc]))
         return res
